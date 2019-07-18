@@ -1,0 +1,13 @@
+---
+- name: "image_store: create directory to store downloaded images"
+  run_once: true
+  changed_when: false
+  tempfile:
+    path: "{{ firmware_manager_download_path | default(omit, True)}}"
+    state: directory
+    suffix: image_store
+  register: r_firmware_manager_image_store_path
+
+- name: "image_store: set __firmware_manager_image_store_path"
+  set_fact:
+    __firmware_manager_image_store_path: "{{ r_firmware_manager_image_store_path.path }}"

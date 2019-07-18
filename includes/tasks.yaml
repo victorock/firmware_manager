@@ -1,0 +1,11 @@
+---
+- name: "tasks: call os/platform/version specific tasks"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - skip: true
+      files:
+        # yamllint disable-line rule:line-length
+        - "{{ firmware_manager_os }}/{{ firmware_manager_platform }}/{{ firmware_manager_version }}/{{ firmware_manager_function }}.yaml"
+        # yamllint disable-line rule:line-length
+        - "{{ firmware_manager_os }}/{{ firmware_manager_platform }}/{{ firmware_manager_function }}.yaml"
+        - "{{ firmware_manager_os }}/{{ firmware_manager_function }}.yaml"

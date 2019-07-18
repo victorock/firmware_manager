@@ -1,0 +1,26 @@
+---
+- name: "nxos.download: system image"
+  run_once: true
+  get_url:
+    url: "{{ firmware_manager_url }}/system.bin"
+    url_username: "{{ firmware_manager_url_username | default(omit, True) }}"
+    url_password: "{{ firmware_manager_url_password | default(omit, True) }}"
+    dest: "{{ __firmware_manager_image_store_path }}/system.bin"
+    checksum: "md5:{{ firmware_manager_url }}/system.md5sum"
+    force_basic_auth: "{{ firmware_manager_url_force_basic_auth }}"
+    validate_certs: "{{ firmware_manager_url_validate_certs }}"
+    tmp_dest: "{{ __firmware_manager_image_store_path }}"
+  register: r_get_url_system
+
+- name: "nxos.download: kickstart image"
+  run_once: true
+  get_url:
+    url: "{{ firmware_manager_url }}/kickstart.bin"
+    url_username: "{{ firmware_manager_url_username | default(omit, True) }}"
+    url_password: "{{ firmware_manager_url_password | default(omit, True) }}"
+    dest: "{{ __firmware_manager_image_store_path }}/kickstart.bin"
+    checksum: "md5:{{ firmware_manager_url }}/kickstart.md5sum"
+    force_basic_auth: "{{ firmware_manager_url_force_basic_auth }}"
+    validate_certs: "{{ firmware_manager_url_validate_certs }}"
+    tmp_dest: "{{ __firmware_manager_image_store_path }}"
+  register: r_get_url_kickstart

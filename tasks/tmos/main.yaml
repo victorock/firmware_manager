@@ -1,0 +1,9 @@
+---
+- name: "download"
+  include_tasks: "download.yaml"
+
+- name: "upload"
+  include_tasks: "upload.yaml"
+
+- name: "install"
+  include_tasks: "install.yaml"

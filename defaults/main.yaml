@@ -1,0 +1,17 @@
+---
+firmware_manager_pre_tasks: []
+firmware_manager_pre_roles: []
+firmware_manager_version: "7.1(4)N1(1)"
+firmware_manager_os: "{{ ansible_network_os | default('nxos') }}"
+firmware_manager_platform: "{{ ansible_network_platform | default(None, True) }}"
+firmware_manager_download_path: ""
+firmware_manager_function: "{{ function | default('main') }}"
+firmware_manager_image_server: "images.acme.com"
+firmware_manager_image_url: "https://{{ firmware_manager_image_server }}/firmwares/{{ firmware_manager_os }}/{{ firmware_manager_platform }}/{{ firmware_manager_version }}/"
+firmware_manager_image_url_username: ""
+firmware_manager_image_url_password: ""
+firmware_manager_image_url_validate_certs: "false"
+firmware_manager_image_url_force_basic_auth: "false"
+firmware_manager_post_tasks: []
+firmware_manager_post_roles: []
+

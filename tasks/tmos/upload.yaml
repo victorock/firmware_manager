@@ -1,0 +1,5 @@
+---
+- name: "tmos.upload: software image"
+  bigip_software_image:
+    server: "{{ ansible_host | default(inventory_hostname) }}"
+    image: "{{ r_get_url_software.dest }}"

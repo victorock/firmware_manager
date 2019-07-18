@@ -1,0 +1,28 @@
+---
+- name: "tmos.install: gather software-volumes"
+  bigip_device_facts:
+    server: "{{ ansible_host | default(inventory_hostname) }}"
+    gather_subset:
+      - "software-volumes"
+  register: "r_bigip_device_facts_software_volumes"
+
+- name: "tmos.install: firmware install"
+  # Ensure connection wont be dropped during update
+  vars:
+    ansible_connection_timeout: 3600
+    ansible_command_timeout: 3600
+  bigip_software_install:
+    server: "{{ ansible_host | default(inventory_hostname) }}"
+    state: "{{ _firmware_manager_tmos_state }}"
+    # filter software_volumes to install on NON active volume
+    volume: "{{ r_bigip_device_facts_software_volumes | json_query(\"software_volumes[?active=='no'].full_path\") | first }}"
+    image: "{{ r_get_url_software.dest | basename  }}"
+
+- name: "tmos.install: Check API availability"
+  uri:
+    url: "https://{{ ansible_host | default(inventory_hostname) }}/tmui/login.jsp"
+    validate_certs: "{{ firmware_manager_url_validate_certs }}"
+  register: r_deploy_tmos_rest
+  until: not r_deploy_tmos_rest is failed
+  retries: 200
+  delay: 10

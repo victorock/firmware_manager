@@ -1,0 +1,5 @@
+---
+_firmware_mgmt_oses:
+  - "nxos"
+  - "tmos"
+  - "fortios"

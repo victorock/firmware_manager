@@ -1,0 +1,24 @@
+---
+- name: "firmware_manager: main"
+  block:
+    - name: "firmware_manager: init vars"
+      include_tasks: "{{ role_path }}/includes/vars.yaml"
+
+    - name: "firmware_manager: init pre_tasks"
+      include_tasks: "{{ role_path }}/includes/pre_tasks.yaml"
+
+    - name: "firmware_manager: init pre_roles"
+      include_tasks: "{{ role_path }}/includes/pre_roles.yaml"
+
+    - name: "firmware_manager: init image_store"
+      include_tasks: "{{ role_path }}/includes/image_store.yaml"
+
+    - name: "firmware_manager: init tasks"
+      include_tasks: "{{ role_path }}/includes/tasks.yaml"
+
+  always:
+    - name: "firmware_manager: init post tasks"
+      include_tasks: "{{ role_path }}/includes/post_tasks.yaml"
+
+    - name: "firmware_manager: init post roles"
+      include_tasks: "{{ role_path }}/includes/post_roles.yaml"

@@ -1,0 +1,10 @@
+---
+- name: "nxos.upload: system image"
+  nxos_file_copy: 
+    local_file: "{{ r_get_url_system.dest }}"
+    remote_file: "{{ r_get_url_system.dest | basename  }}"
+
+- name: "nxos.upload: kickstart image"
+  nxos_file_copy: 
+    local_file: "{{ r_get_url_kickstart.dest }}"
+    remote_file: "{{ r_get_url_kickstart.dest | basename  }}"
