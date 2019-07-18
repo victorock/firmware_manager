@@ -31,26 +31,54 @@ ansible-galaxy install -p roles nmake.firmware_manager
 3) Run your playbook
 
 ## Repository Folder Structure
-The following folder structure is expected from the repository containing firmwares:  
-firmware/[nxos, tmos, ...]/[5000, 7000, bigip, ...]/[ versions.. ]/[ files... ]
+### Cisco Nexus
+Variables defined in inventory:  
+```YAML
+# Network Operating System
+ansible_network_os: "nxos"
 
-Follow some examples below:  
-- **Cisco Nexus 5k**  
-  Variables defined in inventory:  
-    `ansible_network_os: "nxos"`  
-    `ansible_network_platform: "5000" #(Nexus 5k)`  
-    `firmware_manager_version: "7.1(4)N1(1)"`  
-  Repository folder structure:
-    firmwares/nxos/5000/7.1(4)N1(1)/system.bin  
-    firmwares/nxos/5000/7.1(4)N1(1)/system.md5sum  
-    firmwares/nxos/5000/7.1(4)N1(1)/kickstart.bin  
-    firmwares/nxos/5000/7.1(4)N1(1)/kickstart.md5sum  
+# Network Platform
+## Nexus 5k
+ansible_network_platform: "5000"
 
-- **F5 BIG-IP**  
-  Variables defined in inventory:  
-    `ansible_network_os: "tmos"`  
-    `ansible_network_platform: "bigip"`  
-    `firmware_manager_version: "14.1.0"`  
-  Repository folder structure:
-    firmwares/tmos/bigip/14.1.0/software.iso  
-    firmwares/tmos/bigip/14.1.0/software.md5sum  
+## Nexus 7k
+## ansible_network_platform: "7000"
+
+## Nexus 9k
+## ansible_network_platform: "9000"
+
+# Desired Firmware Version
+firmware_manager_version: "7.1(4)N1(1)"
+```
+
+Repository folder structure:
+```
+firmwares/nxos/5000/7.1(4)N1(1)/system.bin  
+firmwares/nxos/5000/7.1(4)N1(1)/system.md5sum  
+firmwares/nxos/5000/7.1(4)N1(1)/kickstart.bin  
+firmwares/nxos/5000/7.1(4)N1(1)/kickstart.md5sum  
+```
+
+> Files can be symlinks
+
+## F5 BIG-IP
+Variables defined in inventory:  
+```YAML
+# Network Operating System
+ansible_network_os: "tmos"
+
+# Network Platform
+## BIG-IP
+ansible_network_platform: "bigip"
+
+# Desired Firmware Version
+firmware_manager_version: "14.1.0"
+```
+
+Repository folder structure:
+```
+firmwares/tmos/bigip/14.1.0/software.iso  
+firmwares/tmos/bigip/14.1.0/software.md5sum  
+```
+
+> Files can be symlinks
